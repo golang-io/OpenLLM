@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"strings"
 	"time"
 
@@ -204,29 +203,7 @@ func (o *OpenAI) CompletionStream(ctx context.Context, input *Input, streamOutpu
 	if err != nil {
 		return nil, NewLLMError(ProviderOpenAI, "API_ERROR", "OpenAI API调用失败", err)
 	}
-	jsonStr, _ := json.Marshal(completion)
-	log.Printf("%s", string(jsonStr))
 	return fromOpenAIResponse(completion, time.Since(startTime)), nil
-}
-
-// Provider 获取提供商信息
-// Provider returns the provider information
-func (o *OpenAI) Provider() ProviderInfo {
-	return ProviderInfo{
-		Type:    ProviderOpenAI,
-		Name:    "OpenAI",
-		Version: "v1",
-		// Model:   o.options.Model,
-		// BaseURL: o.options.URL,
-		Capabilities: ProviderCapabilities{
-			ToolCall:      true,
-			Streaming:     true,
-			Temperature:   true,
-			TopP:          true,
-			Seed:          true,
-			SystemMessage: true,
-		},
-	}
 }
 
 // ============================================================================

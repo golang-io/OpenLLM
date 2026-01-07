@@ -98,6 +98,11 @@ func (a *Azure) CompletionStream(ctx context.Context, input *Input, streamOutput
 		return nil, NewLLMError(ProviderAzure, "API_ERROR", "Azure OpenAI API调用失败", err)
 	}
 
+	// 检查是否有响应内容 / Check if response has content
+	if len(completion.Choices) == 0 {
+		return nil, NewLLMError(ProviderAzure, "EMPTY_RESPONSE", "Azure OpenAI API返回空响应", nil)
+	}
+
 	return fromAzureResponse(completion, time.Since(startTime)), nil
 }
 

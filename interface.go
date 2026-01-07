@@ -21,10 +21,6 @@ type LLM interface {
 	// callback函数在收到每个chunk时被调用，用于实时输出
 	// The callback function is called for each chunk received for real-time output
 	CompletionStream(context.Context, *Input, StreamOutput, ...Option) (*Output, error)
-
-	// Provider 获取提供商信息
-	// Provider returns the provider information
-	Provider() ProviderInfo
 }
 
 // ============================================================================

@@ -227,16 +227,3 @@ func TestJSONSchema_Validate(t *testing.T) {
 		})
 	}
 }
-
-func TestToolCall_ID(t *testing.T) {
-	// 测试ToolCall.ID字段（确保从Id改为ID）
-	tc := ToolCall{
-		ID:        "call_123",
-		Name:      "test",
-		Arguments: map[string]any{"key": "value"},
-	}
-
-	if tc.ID != "call_123" {
-		t.Errorf("Expected ID 'call_123', got %s", tc.ID)
-	}
-}
